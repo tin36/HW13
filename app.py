@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, abort, send_from_directory
-from functions import read_json, get_tags, get_posts_tag, add_post
+from functions import read_json, get_tags, get_posts_tag, add_post, replay_files_name
 
 POST_PATH = "posts.json"
 UPLOAD_FOLDER = "uploads/images"
@@ -33,7 +33,7 @@ def page_post_create():
     picture = request.files.get('picture')
     if not content or not picture:
         abort(400)
-
+    picture.filename = replay_files_name(picture.filename)
     path = f'{UPLOAD_FOLDER}/{picture.filename}'
     post = {
         'content': content,
@@ -49,6 +49,10 @@ def page_post_create():
 def static_dir(path):
     return send_from_directory("uploads", path)
 
+@app.route("/all_posts")
+def all_posts_():
+    posts = read_json(POST_PATH)
+    return render_template('all_posts.html', posts=posts)
 
 app.run(debug=True)
 

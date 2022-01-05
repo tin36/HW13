@@ -1,4 +1,4 @@
-import json
+import json, os, uuid
 
 
 def read_json(filename):
@@ -28,3 +28,10 @@ def add_post(filename, post):
     data.append(post)
     with open(filename, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4, sort_keys=True)
+
+def replay_files_name(filename):
+    files = os.listdir(path="uploads/images")
+    filename = f'{str(uuid.uuid4())}.png'
+    return filename
+
+

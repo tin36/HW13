@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Все посты по тегу</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-$END$
+<main>
+
+    <a href="/" class="link">Назад</a>
+
+    <h1>Лента</h1>
+    {% for i in posts %}
+
+    <div class="post">
+        <img src="{{i.pic}}" width="100%" alt="">
+        <p>{{i.content}}</p><hr>
+    </div>
+    {% endfor %}
+
+
+    <a href="/post" class="button">Добавить пост</a>
+
+</main>
 </body>
 </html>
