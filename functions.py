@@ -16,3 +16,9 @@ def get_tags(data):
                 result.add(word.lstrip('#'))
     return result
 
+def get_posts_tag(data, tag):
+    result = []
+    for i in data:
+        if f'#{tag}' in i['content']:
+            result.append(i)
+    return result
